@@ -53,7 +53,29 @@
       var yourSum = 0;
 
       // Refactor the work above into a few different functions that are reusable to the extent that you can
-      for (var i = 0; i < theArray.length, i++) { /* Do stuff here */ }
+
+      function ElementOfAnArray(a,i) {
+        return a[i]
+      }
+
+      function addStringLength(base, str) {
+        return base += str.length
+      }
+
+      function addNumber(base, numvalue) {
+        return base += numvalue
+      }
+
+      for (var i = 0; i < theArray.length, i++) {
+        arrayValue = ElementOfAnArray(theArray,i)
+        if (typeof arrayValue === 'string') {         // String case
+          addStringLength(exampleSum, arrayValue)
+        } else if (typeof arrayValue === 'number') {  // Number case
+          addNumber(exampleSum, arrayValue)
+        } else {                                      // Otherwise
+          console.log("Not sure how to proceed with value:", arrayValue)
+        }
+      }
 
       /* =====================
 
