@@ -59,19 +59,19 @@
       }
 
       function addStringLength(base, str) {
-        return base += str.length
+        return base = base + str.length
       }
 
       function addNumber(base, numvalue) {
-        return base += numvalue
+        return base = base + numvalue
       }
 
-      for (var i = 0; i < theArray.length, i++) {
+      for (var i = 0; i < theArray.length; i++) {
         arrayValue = ElementOfAnArray(theArray,i)
         if (typeof arrayValue === 'string') {         // String case
-          addStringLength(exampleSum, arrayValue)
+          yourSum = addStringLength(exampleSum, arrayValue)
         } else if (typeof arrayValue === 'number') {  // Number case
-          addNumber(exampleSum, arrayValue)
+          yourSum = addNumber(exampleSum, arrayValue)
         } else {                                      // Otherwise
           console.log("Not sure how to proceed with value:", arrayValue)
         }
@@ -82,6 +82,7 @@
       End code
 
       ===================== */
+      console.log("Success: ", exampleSum === 169)
       console.log("Success: ", yourSum === 169)
     </script>
   </body>
