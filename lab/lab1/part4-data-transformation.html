@@ -51,21 +51,15 @@
 
     ===================== */
 
+    // Filter dataset
     var data = bikeArrayClean;
+    var dataFiltered = []
 
-    /* =====================
-
-    Start code to filter data
-
-    ===================== */
-
-
-
-    /* =====================
-
-    End code to filter data
-
-    ===================== */
+    for(i=0; i < data.length; i++){
+      if(data[i][3] > 20){
+        dataFiltered.push(data[i])
+      }
+    }
 
     var map = L.map('map', {
       center: [39.9522, -75.1639],
@@ -80,19 +74,10 @@
       ext: 'png'
     }).addTo(map);
 
-    /* =====================
-
-    Start code to add markers to map
-
-    ===================== */
-
-
-
-    /* =====================
-
-    End code to add markers to map
-
-    ===================== */
+    //Start code to add markers to map
+    for (i = 0; i <dataFiltered.length; i++){
+      L.marker([dataFiltered[i][1], dataFiltered[i][0]]).addTo(map).bindPopup(dataFiltered[i][2]).openPopup();
+    }
 
     </script>
   </body>
