@@ -20,7 +20,7 @@
     <script>
       var map = L.map('map', {
         center: [39.9522, -75.1639],
-        zoom: 14
+        zoom: 12
       });
       var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
         attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -52,16 +52,7 @@
       Start code
       ===================== */
 
-      // Health centers data
-      var data = healthCenters
-
-      // Personized drop pin icon
-      var myIcon = L.icon({
-        iconUrl: 'my-icon.png',
-        iconSize: [50, 45],
-        popupAnchor: [0, -20]
-      });
-
+      // Task 1: array of arrays
       // Function to transform the js file to an array of arrays
       var jsonToCsv = function(json) {
         var firstobj = json[0];
@@ -78,9 +69,25 @@
           ModifiedArray.push(Vals)
         }
         // Finally, log the health center data as required
-        var json = ModifiedArray
+        var json = ModifiedArray;
         console.log(json);
       };
+
+      // Task 2: markers on map
+      // Health centers located within the zip codes from 19140 to 19149
+      var data = [];
+      for (i = 0; i < healthCenters.length; i++){
+        if (healthCenters[i]['ZIP'] >= 19139 && healthCenters[i]['ZIP'] <= 19149){
+          data.push(healthCenters[i]);
+        }
+      }
+
+      // Personized drop pin icon
+      var myIcon = L.icon({
+        iconUrl: 'my-icon.png',
+        iconSize: [50, 45],
+        popupAnchor: [0, -20]
+      });
 
       // Function to mark the locations of every health center
       var addMarkers = function(data,map) {
