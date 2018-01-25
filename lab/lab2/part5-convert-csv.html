@@ -36,6 +36,12 @@
       Start code
 
       ===================== */
+      var split = healthCentersCSV.split(";")
+      var update = []
+      for (i=0; i < split.length; i++) {
+        update.push(split[i].split(","))
+      }
+      var healthCentersCSV = update
 
       console.log(healthCentersCSV)
 
