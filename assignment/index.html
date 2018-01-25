@@ -48,17 +48,52 @@
        Remember: functions are meant to facilitate code comprehension and reuse. Try to use them to organize your code.
       ===================== */
 
-
       /* =====================
-
       Start code
-
       ===================== */
 
-      var jsonToCsv = function(json) { console.log(json); };
+      // Health centers data
+      var data = healthCenters
 
+      // Personized drop pin icon
+      var myIcon = L.icon({
+        iconUrl: 'my-icon.png',
+        iconSize: [50, 45],
+        popupAnchor: [0, -20]
+      });
 
-      var addMarkers = function(map) {};
+      // Function to transform the js file to an array of arrays
+      var jsonToCsv = function(json) {
+        var firstobj = json[0];
+        // Create an empty array
+        var ModifiedArray = [];
+        // First, get all keys and store the info into the array just created
+        var Keys = Object.keys(firstobj).map(function (key) { return key });
+        ModifiedArray.push(Keys)
+        // Then loop through every object in the original array to store rows of data into the same array
+        for(i = 0; i < json.length; i++){
+          obj = json[i];
+          // Get all values
+          var Vals = Object.keys(obj).map(function (key) { return obj[key] });
+          ModifiedArray.push(Vals)
+        }
+        // Finally, log the health center data as required
+        var json = ModifiedArray
+        console.log(json);
+      };
+
+      // Function to mark the locations of every health center
+      var addMarkers = function(data,map) {
+        for (i = 0; i <data.length; i++){
+          // If the health center does not have dental service, just add the default marker
+          if (data[i]['DENTAL_PHONE'] === 'N/A'){
+            L.marker([data[i]['LAT'], data[i]['LNG']]).addTo(map).bindPopup(data[i]['NAME']).openPopup();
+          // If the helth center does have dental service, add the personized icon to mark the location
+          }else{
+            L.marker([data[i]['LAT'], data[i]['LNG']], {icon: myIcon}).addTo(map).bindPopup(data[i]['NAME'] + '(Dental Service Available)').openPopup();
+          }
+        }
+      };
 
       /* =====================
 
@@ -66,9 +101,9 @@
 
       ===================== */
 
-
+      // Call functions
       jsonToCsv(healthCenters);
-      addMarkers(map);
+      addMarkers(data, map);
     </script>
     <!--Your code ends here-->
   </body>
